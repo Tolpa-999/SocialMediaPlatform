@@ -12,8 +12,22 @@ userRoute.route('/')
 userRoute.route('/register')
     .post(userController.register)
 
+userRoute.route('/verify-email')
+    .post(userController.verifyEmail)
+
 userRoute.route('/login')
     .post(userController.login)
+
+// reset password
+userRoute.route('/reset-pass-req')
+    .post(verifyToken, userController.reset_password_request)
+userRoute.route('/reset-pass')
+    .post(verifyToken, userController.reset_password)
+
+// settings
+userRoute.route('/settings')
+    .get(verifyToken, userController.get_settings)
+    .post(verifyToken, userController.update_settings)
 
 userRoute.route('/refresh')
     .post(userController.refresh)
